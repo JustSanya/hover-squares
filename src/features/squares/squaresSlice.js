@@ -19,8 +19,8 @@ export const squaresSlice = createSlice({
   name: 'squares',
   initialState,
   reducers: {
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+    updateMode: (state, action) => {
+      state.currentMode = state.modes.find(mode => mode.field === Number(action.payload));
     },
   },
   extraReducers: (builder) => {
@@ -31,7 +31,7 @@ export const squaresSlice = createSlice({
   }
 });
 
-export const { incrementByAmount } = squaresSlice.actions;
+export const { updateMode } = squaresSlice.actions;
 
 export const selectModes = (state) => state.squares.modes;
 export const selectMode = (state) => state.squares.currentMode;

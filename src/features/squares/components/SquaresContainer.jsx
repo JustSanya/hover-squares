@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getModes } from '../squaresSlice';
 
+import ModeSelector from './ModeSelector';
+
 const SquaresContainer = () => {
   const dispatch = useDispatch();
 
@@ -14,7 +16,9 @@ const SquaresContainer = () => {
   }, [dispatch])
 
   return (
-    <div>SquaresContainer</div>
+    <div>
+      <ModeSelector />
+    </div>
   )
 }
 
