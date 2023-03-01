@@ -4,7 +4,8 @@ import { fetchModes } from './squaresAPI';
 const initialState = {
   modes: [],
   currentMode: {},
-  hoveredCells: []
+  hoveredCells: [],
+  gameInProgress: false
 };
 
 export const getModes = createAsyncThunk(
@@ -20,8 +21,27 @@ export const squaresSlice = createSlice({
   initialState,
   reducers: {
     updateMode: (state, action) => {
-      state.currentMode = state.modes.find(mode => mode.field === Number(action.payload));
+      let resetGame = false;
+
+      if (state.gameInProgress) {
+        resetGame = window.confirm('Reset current progress and start new game?');
+      }
+
+      if (resetGame || !state.gameInProgress) {
+        state.currentMode = state.modes.find(mode => mode.field === Number(action.payload));
+      }
+
+      if (resetGame) {
+        state.gameInProgress = false;
+      }
     },
+    toggleGameStatus: (state) => {
+      if (state.gameInProgress && !window.confirm('Stop playing?')) return;
+
+      if (!state.currentMode || !state.currentMode.field) return alert('Please select a mode to start game.');
+
+      state.gameInProgress = !state.gameInProgress;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -31,10 +51,11 @@ export const squaresSlice = createSlice({
   }
 });
 
-export const { updateMode } = squaresSlice.actions;
+export const { toggleGameStatus, updateMode } = squaresSlice.actions;
 
 export const selectModes = (state) => state.squares.modes;
 export const selectMode = (state) => state.squares.currentMode;
+export const selectGameStatus = (state) => state.squares.gameInProgress;
 export const selectHoveredCells = (state) => state.squares.hoveredCells;
 
 export default squaresSlice.reducer;

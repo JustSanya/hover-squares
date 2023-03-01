@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getModes } from '../squaresSlice';
 
 import ModeSelector from './ModeSelector';
+import ToggleGame from './ToggleGame';
 
 const SquaresContainer = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const SquaresContainer = () => {
   return (
     <div>
       <ModeSelector />
+      <ToggleGame />
     </div>
   )
 }
