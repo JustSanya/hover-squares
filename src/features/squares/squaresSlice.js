@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchCount } from './squaresAPI';
+import { fetchModes } from './squaresAPI';
 
 const initialState = {
   modes: [],
@@ -7,11 +7,11 @@ const initialState = {
   hoveredCells: []
 };
 
-export const incrementAsync = createAsyncThunk(
-  'squares/fetchModes',
-  async (amount) => {
-    const response = await fetchCount(amount);
-    return response.data;
+export const getModes = createAsyncThunk(
+  'squares/getModes',
+  async () => {
+    const response = await fetchModes();
+    return response;
   }
 );
 
@@ -23,9 +23,15 @@ export const squaresSlice = createSlice({
       state.value += action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getModes.fulfilled, (state, action) => {
+        state.modes = action.payload;
+      })
+  }
 });
 
-export const { increment, decrement, incrementByAmount } = squaresSlice.actions;
+export const { incrementByAmount } = squaresSlice.actions;
 
 export const selectModes = (state) => state.squares.modes;
 export const selectMode = (state) => state.squares.currentMode;

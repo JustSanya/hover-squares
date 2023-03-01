@@ -1,6 +1,12 @@
 // A mock function to mimic making an async request for data
-export function fetchCount(amount = 1) {
-  return new Promise((resolve) =>
-    setTimeout(() => resolve({ data: amount }), 500)
-  );
+export async function fetchModes() {
+  try {
+    const result = await fetch('http://demo7919674.mockable.io');
+    
+    return await result.json();
+  } catch(e) {
+    console.error(e);
+
+    return [];
+  }
 }
