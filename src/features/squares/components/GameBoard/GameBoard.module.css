@@ -1,0 +1,17 @@
+.board {
+  border: 1px solid black;
+  border-bottom: 0;
+  border-right: 0;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+}
