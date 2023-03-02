@@ -4,7 +4,7 @@ import { fetchModes } from './squaresAPI';
 const initialState = {
   modes: [],
   currentMode: {},
-  hoveredCells: [],
+  hoveredCells: {},
   gameInProgress: false
 };
 
@@ -33,6 +33,7 @@ export const squaresSlice = createSlice({
 
       if (resetGame) {
         state.gameInProgress = false;
+        state.hoveredCells = {};
       }
     },
     toggleGameStatus: (state) => {
@@ -41,6 +42,17 @@ export const squaresSlice = createSlice({
       if (!state.currentMode || !state.currentMode.field) return window.alert('Please select a mode to start game.');
 
       state.gameInProgress = !state.gameInProgress;
+
+      if (!state.gameInProgress) {
+        state.hoveredCells = {};
+      }
+    },
+    updateHoveredCells: (state, action) => {
+      if (action.payload in state.hoveredCells) {
+        delete state.hoveredCells[action.payload]
+      } else {
+        state.hoveredCells[action.payload] = true;
+      }
     }
   },
   extraReducers: (builder) => {
@@ -51,7 +63,7 @@ export const squaresSlice = createSlice({
   }
 });
 
-export const { toggleGameStatus, updateMode } = squaresSlice.actions;
+export const { toggleGameStatus, updateMode, updateHoveredCells } = squaresSlice.actions;
 
 export const selectModes = (state) => state.squares.modes;
 export const selectMode = (state) => state.squares.currentMode;
