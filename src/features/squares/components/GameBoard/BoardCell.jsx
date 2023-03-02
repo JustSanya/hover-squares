@@ -15,7 +15,6 @@ const BoardCell = ({coord, hovered}) => {
       className={`${styles.cell} ${hovered && styles.hovered}`}
       onMouseEnter={handleMouseEnter}
     >
-      {coord}
     </div>
   )
 }

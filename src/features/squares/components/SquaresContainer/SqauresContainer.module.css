@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+}
+
+.controls > * {
+  display: block;
+}

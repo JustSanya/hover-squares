@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectGameStatus, toggleGameStatus } from '../../squaresSlice';
+import styles from './ToggleGame.module.css';
 
 const ToggleGame = () => {
   const gameStatus = useSelector(selectGameStatus);
@@ -11,7 +12,7 @@ const ToggleGame = () => {
   }
 
   return (
-    <button onClick={handleClick}>{ gameStatus ? 'Stop' : 'Start' }</button>
+    <button className={styles.btn} onClick={handleClick}>{ gameStatus ? 'Stop' : 'Start' }</button>
   )
 }
 

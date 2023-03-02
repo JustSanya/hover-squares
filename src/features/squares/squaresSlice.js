@@ -80,10 +80,10 @@ export const selectMatrix = createSelector([selectMode], (gameMode) => {
     const row = Math.floor(cell / gameMode.field);
 
     if (acc[row]) {
-      acc[row].push(`${row}${cell - row * gameMode.field}`);
+      acc[row].push(`${row}-${cell - row * gameMode.field}`);
     } else {
       acc.push([]);
-      acc[row].push(`${row}${cell - row * gameMode.field}`);
+      acc[row].push(`${row}-${cell - row * gameMode.field}`);
     }
 
     return acc;

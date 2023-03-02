@@ -13,7 +13,7 @@ const ModeSelector = () => {
   }
 
   return (
-    <div>
+    <>
       <select value={currentMode?.field} onChange={handleChange}>
         <option>Pick mode</option>
         {modes.map((mode) => (
@@ -22,7 +22,7 @@ const ModeSelector = () => {
           </option>
         ))}
       </select>
-    </div>
+    </>
   )
 }
 

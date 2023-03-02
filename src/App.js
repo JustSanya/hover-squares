@@ -1,6 +1,5 @@
 import React from 'react';
 import Squares from './features/squares';
-import './App.css';
 
 function App() {
   return (
